@@ -136,6 +136,10 @@ namespace SimpleToDoApp_AspNet.Controllers
             await HttpContext.SignOutAsync("MyCookieAuth"); //removes cookie from browser
             return RedirectToAction("Login");
         }
+        public IActionResult ForgotCredentials()
+        {
+            return View();
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

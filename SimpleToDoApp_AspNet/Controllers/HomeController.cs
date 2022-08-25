@@ -99,7 +99,26 @@ namespace SimpleToDoApp_AspNet.Controllers
             ViewData["isAuthenticated"] = false;
             return View();
         }
-
+        public IActionResult Privacy()
+        {
+            try
+            {
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
+                bool isAuthenticated = HttpContext.User.Identity.IsAuthenticated;
+                if (isAuthenticated == true)
+                {
+                    ViewData["isAuthenticated"] = true;
+                    return View();
+                }
+            }
+            catch
+            {
+                ViewData["isAuthenticated"] = false;
+                return View();
+            }
+            ViewData["isAuthenticated"] = false;
+            return View();
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
