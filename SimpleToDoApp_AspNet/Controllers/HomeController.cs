@@ -11,19 +11,38 @@ namespace SimpleToDoApp_AspNet.Controllers
 
     public class HomeController : Controller
     {
-        //Create connection to MongoClient object
+        //Create connection to MongoClient object //will be added to appsettings.json later when using an actual database
         public static MongoClient dbClient = new("mongodb://localhost:27017");
 
         public async Task<IActionResult> Index()
         {
+            try
+            {
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
+                bool isAuthenticated = HttpContext.User.Identity.IsAuthenticated; //Check if user is authenticated via the cookies
+                var name = HttpContext.User.Claims.First(c => c.Type == "name").Value; //store the name of the user in a variable, extracted from claims of cookie
 
-            return View(await GetToDoModels());
-            
+                if (isAuthenticated == true)
+                {
+                    ViewData["Name"] = name;
+                    //if user is authenticated, then we want to return the view and get the to do models. 
+                    return View(await GetToDoModels());
+                }
+            }
+            catch
+            {
+                //if the user is not authenticated, send them to the login page
+                return RedirectToAction("Login", "Account"); 
+            }
+            return RedirectToAction("Login", "Account");
+
         }
-        public async static Task<List<ToDoModel>> GetToDoModels()
+        public async Task<List<ToDoModel>> GetToDoModels()
         {
+            var email = HttpContext.User.Claims.First(c => c.Type == "email").Value;
+
             var database = dbClient.GetDatabase("ToDoDB");
-            var collection = database.GetCollection<ToDoModel>("ToDoItems");
+            var collection = database.GetCollection<ToDoModel>(email);
             var results = await collection.FindAsync(_ => true);
             return results.ToList();
         }
@@ -32,9 +51,11 @@ namespace SimpleToDoApp_AspNet.Controllers
         [HttpPost]
         public async Task<IActionResult> AddNewToDo(IFormCollection form)
         {
+            var email = HttpContext.User.Claims.First(c => c.Type == "email").Value;
+
             string addNewTaskInput = form["addNewTaskInput"].ToString();
             var database = dbClient.GetDatabase("ToDoDB");
-            var collection = database.GetCollection<ToDoModel>("ToDoItems");
+            var collection = database.GetCollection<ToDoModel>(email);
             ToDoModel newToDo = new () { ToDoTask = addNewTaskInput};
             await collection.InsertOneAsync(newToDo);
 
@@ -45,8 +66,10 @@ namespace SimpleToDoApp_AspNet.Controllers
         [HttpPost]
         public async Task<ActionResult<ToDoModel>> DeleteToDo(string id)
         {
+            var email = HttpContext.User.Claims.First(c => c.Type == "email").Value;
+
             var database = dbClient.GetDatabase("ToDoDB");
-            var collection = database.GetCollection<ToDoModel>("ToDoItems");
+            var collection = database.GetCollection<ToDoModel>(email);
 
             var builder = Builders<ToDoModel>.Filter;
             var filter = builder.Eq(x => x.Id, id);
@@ -55,11 +78,25 @@ namespace SimpleToDoApp_AspNet.Controllers
 
             return RedirectToAction(nameof(Index));
         }
-        
-
 
         public IActionResult Documentation()
         {
+            try
+            {
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
+                bool isAuthenticated = HttpContext.User.Identity.IsAuthenticated;
+                if (isAuthenticated == true)
+                {
+                    ViewData["isAuthenticated"] = true;
+                    return View();
+                }
+            }
+            catch
+            {
+                ViewData["isAuthenticated"] = false;
+                return View();
+            }
+            ViewData["isAuthenticated"] = false;
             return View();
         }
 
