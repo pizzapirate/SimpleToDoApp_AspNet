@@ -1,6 +1,13 @@
 ﻿
 @{
     ViewData["Title"] = "Documentation";
+#pragma warning disable CS8605 // Dereference of a possibly null reference.
+    if ((bool)ViewData["isAuthenticated"] == true) {
+        Layout = "_Layout";
+    }
+    else {
+        Layout = "_LayoutNoLogoutBtn";
+    }
 }
 
 <h1>Documentation</h1>

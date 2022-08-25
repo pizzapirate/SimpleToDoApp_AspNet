@@ -1,0 +1,44 @@
+﻿@model IEnumerable<User>
+@{
+    ViewData["Title"] = "Signup";
+    Layout = "_LayoutNoLogoutBtn";
+}
+@if (ViewData["Message"] != null)
+{
+    <div class="alert alert-primary">
+        <strong>@ViewData["Message"]</strong>
+    </div>
+}
+<form asp-action="NewSignUp">
+
+    <!-- Email input -->
+    <div class="form-outline mb-4">
+        <input type="email" id="form2Example1" class="form-control" name="email" />
+        <label class="form-label" for="form2Example1">Email address</label>
+    </div>
+
+    <!-- FirstName input -->
+    <div class="form-outline mb-4">
+        <input type="text" id="form2Example2" class="form-control" name="firstname" />
+        <label class="form-label" for="form2Example2">FirstName</label>
+    </div>
+    <!-- Password input -->
+    <div class="form-outline mb-4">
+        <input type="password" id="form2Example2" class="form-control" name="password" />
+        <label class="form-label" for="form2Example2">Password</label>
+    </div>
+
+    <!-- Confirm Password input -->
+    <div class="form-outline mb-4">
+        <input type="password" id="form2Example2" class="form-control" name="confirmpassword" />
+        <label class="form-label" for="form2Example2">Confirm Password</label>
+    </div>
+
+    <!-- Submit button -->
+    <button method="post" type="submit" class="btn btn-primary btn-block mb-4" asp-action="NewSignUp">Sign up</button>
+
+    <!-- Register buttons -->
+    <div class="text-center">
+        <p>Already a member? <a method="post" asp-action="Login">Login</a></p>
+    </div>
+</form>

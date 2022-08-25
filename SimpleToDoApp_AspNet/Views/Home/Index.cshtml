@@ -10,9 +10,15 @@
 
                 <div class="card" style="border-radius: 15px;">
                     <div class="card-body p-5">
+                        @{
+                            if (ViewData["Name"] == null) {
+                                <h6 class="mb-3">For some reason you do not have a name. Here is your list of things todo.</h6>
+                            }
+                            else {
+                                <h6 class="mb-3">Hello @ViewData["Name"],</h6>
+                            }
 
-                        <h6 class="mb-3">To Do List</h6>
-
+                        }
                         <form asp-action="AddNewToDo" method="post" class="d-flex justify-content-center align-items-center mb-4">
                             <div class="form-outline flex-fill">
                                 <div class="d-flex" justify-content-center>
