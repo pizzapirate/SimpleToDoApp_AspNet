@@ -40,13 +40,6 @@
                                     <ul class="list-group mb-0">
                                         <li class="list-group-item d-flex justify-content-between align-items-center border-start-0 border-top-0 border-end-0 border-bottom rounded-0 mb-2">
                                             <div class="d-flex align-items-center">
-                                                @if (item.ToDoTask == "test")
-                                                {
-                                                    <input class="form-check-input me-2" type="checkbox" value="" checked/>
-                                                }
-                                                else {
-                                                    <input class="form-check-input me-2" type="checkbox" value="" />
-                                                }
                                                 @Html.DisplayFor(modelItem => item.ToDoTask)
                                             </div>
                                             <button type="submit" class="btn btn-outline-primary btn-sm ms-2">Delete</button>

@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "Privacy";
+#pragma warning disable CS8605 // Dereference of a possibly null reference.
+    if ((bool)ViewData["isAuthenticated"] == true)
+    {
+        Layout = "_Layout";
+    }
+    else
+    {
+        Layout = "_LayoutNoLogoutBtn";
+    }
+}
+
+<div>
+    <h1>Privacy</h1>
+    <p>It is not recommended to use an actual password since this site does not hash your password (yet)</p>
+    <h1>Cookies</h1>
+    <p>This site uses cookies to store your data and we are legally obliged to disclose this and by using this you are agreeing to this. There is no way to disagree.</p>
+</div>
