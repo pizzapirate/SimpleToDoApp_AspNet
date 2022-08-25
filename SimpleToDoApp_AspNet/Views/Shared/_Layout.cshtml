@@ -7,12 +7,13 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/SimpleToDoApp_AspNet.styles.css" asp-append-version="true" />
+    <script src="https://kit.fontawesome.com/2f51583245.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-primary border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand navbar-dark" asp-area="" asp-controller="Home" asp-action="Index">Simple To Do App</a>
+                <a class="navbar-brand navbar-dark" asp-area="" asp-controller="Home" asp-action="Index"><i class="fa-solid fa-clipboard-list"></i> Simple To Do App</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -24,7 +25,7 @@
                         </li>
                     </ul>
 
-                    <div class="d-flex">
+                    <div class="d-flex"> 
                         <form>
                             <button type="submit" class="btn btn-outline-light" asp-area="" asp-controller="Account" asp-action="LogoutButton">Logout</button>
                         </form>
