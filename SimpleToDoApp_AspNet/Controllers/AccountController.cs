@@ -5,6 +5,7 @@ using MongoDB.Driver;
 using System.Security.Claims;
 using SimpleToDoApp_AspNet.Models;
 using System.Diagnostics;
+using SimpleToDoApp_AspNet;
 
 namespace SimpleToDoApp_AspNet.Controllers
 {
@@ -37,7 +38,7 @@ namespace SimpleToDoApp_AspNet.Controllers
             }
 
             var collection = database.GetCollection<User>(email);
-            //how to target password
+            //how to target password document within the collection linked to the particular email address
             var documents = await collection.FindAsync(_ => true);
             var password = String.Empty;
             var firstname = String.Empty;
@@ -46,8 +47,8 @@ namespace SimpleToDoApp_AspNet.Controllers
                 password = $"{document.Password}";
                 firstname = $"{document.FirstName}";
             }
-            //password checker
-            if (password == inputpassword)
+            //password checker using verification of my hasher
+            if (SecurePasswordHasher.Verify(inputpassword, password))
             {
                 //if all worked then login and authenticate 
 
@@ -88,6 +89,8 @@ namespace SimpleToDoApp_AspNet.Controllers
 
             var newUserEmail = form["email"].ToString();
             var collection = database.GetCollection<User>(newUserEmail);
+            string inputPassword = form["password"].ToString();
+            var hashedPw = SecurePasswordHasher.Hash(inputPassword);
 
             if (DoesCollectionExist(newUserEmail) == false)
             {
@@ -95,7 +98,7 @@ namespace SimpleToDoApp_AspNet.Controllers
                 {
                     Email = form["email"].ToString(),
                     FirstName = form["firstname"].ToString(),
-                    Password = (form["password"].ToString())
+                    Password = hashedPw
                 };
                 await collection.InsertOneAsync(newUser);
                 ViewData["Message"] = "Successfully registered - you may now login.";
