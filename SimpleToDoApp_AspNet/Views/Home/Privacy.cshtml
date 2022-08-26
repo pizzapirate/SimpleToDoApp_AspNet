@@ -11,14 +11,34 @@
     }
 }
 
-<div>
-    <h1>Privacy</h1>
-    <p>Your data will not be shared with anyone.</p>
 
-    <h1>Security</h1>
-    <p>Your password is stored using a hash and 1000 iterations therefore it is safely secured in the database.</p>
+<div class="py-2 pt-4">
+    <h1 class="pb-3"><i class="fa-solid fa-eye"></i> Privacy</h1>
+    <p>
+        This website collects and stores information that you give it. <strong>However,</strong> your data will <strong>not</strong> be shared with anyone.
+    </p>
+    <p>
+        The only data that is stored are the email, name, password and to do's that you choose to give the site.
+    </p>
+</div>
+<div class="py-2 pt-4">
+    <h3 class="pb-3">Security</h3>
+    <p>
+        Your password is safely stored in the database using a hash and generated 128-bit salt using a sequence of cryptographically strong random bytes, 
+        aswell as 10000 iterations. This makes it very very hard and near impossible for it to be decrypted, and it means that even site administrators with database access cannot view your password.
+    </p>
+    <p>
+        The full source code for the password hashing function this site uses written in C# can be found <a style="text-decoration: none;" href="https://github.com/pizzapirate/SimpleToDoApp_AspNet/blob/master/SimpleToDoApp_AspNet/MyPasswordHasher.cs">here</a>.
+    </p>
+</div>
 
-    <h1>Cookies</h1>
+<div class="py-2 pt-4">
+    <h3 class="pb-3">Cookies <i class="fa-solid fa-cookie-bite"></i></h3>
     <p>This site uses cookies to store your data and we are legally obliged to disclose this and by using this site you are agreeing to this. There is no way to disagree.</p>
-    <P>The only data stored in cookies is your first name and your email address, both of which you provided the site with.</P>
+    <P>The only data stored in cookies is your first name, used to personalise the greeting you see on the index page, and your email address, which is used to tell the database
+        who's to do list should be displayed, both of which <strong>you</strong> provided the site with.
+    </P>
+    <p>
+        Additionally, cookies are used to authenticate users, so that your internet browser recognizes you and you don't need to login every single time you want to use this site.
+    </p>
 </div>
