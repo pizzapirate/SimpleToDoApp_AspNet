@@ -3,43 +3,47 @@
     ViewData["Title"] = "Signup";
     Layout = "_LayoutNoLogoutBtn";
 }
-@if (ViewData["Message"] != null)
-{
-    <div class="alert alert-primary">
-        <strong>@ViewData["Message"]</strong>
-    </div>
-}
-<form asp-action="NewSignUp">
+<div class="row d-flex justify-content-center pt-4">
+    <div class="col-xl-4 col-lg-5 col-md-6 col-sm-8 col-9">
+        @if (ViewData["Message"] != null)
+        {
+            <div class="alert alert-primary">
+                <strong>@ViewData["Message"]</strong>
+            </div>
+        }
+        <form asp-action="NewSignUp">
 
-    <!-- Email input -->
-    <div class="form-outline mb-4">
-        <input type="email" id="form2Example1" class="form-control" name="email" />
-        <label class="form-label" for="form2Example1">Email address</label>
-    </div>
+            <!-- Email input -->
+            <div class="form-outline mb-4">
+                <input type="email" id="form2Example1" class="form-control" name="email" />
+                <label class="form-label" for="form2Example1">Email address</label>
+            </div>
 
-    <!-- FirstName input -->
-    <div class="form-outline mb-4">
-        <input type="text" id="form2Example2" class="form-control" name="firstname" />
-        <label class="form-label" for="form2Example2">FirstName</label>
-    </div>
-    <!-- Password input -->
-    <div class="form-outline mb-4">
-        <input type="password" id="form2Example2" class="form-control" name="password" />
-        <label class="form-label" for="form2Example2">Password</label>
-    </div>
+            <!-- FirstName input -->
+            <div class="form-outline mb-4">
+                <input type="text" id="form2Example2" class="form-control" name="firstname" />
+                <label class="form-label" for="form2Example2">FirstName</label>
+            </div>
+            <!-- Password input -->
+            <div class="form-outline mb-4">
+                <input type="password" id="form2Example2" class="form-control" name="password" />
+                <label class="form-label" for="form2Example2">Password</label>
+            </div>
 
-    <!-- Confirm Password input -->
-    <div class="form-outline mb-4">
-        <input type="password" id="form2Example2" class="form-control" name="confirmpassword" />
-        <label class="form-label" for="form2Example2">Confirm Password</label>
-    </div>
+            <!-- Confirm Password input -->
+            <div class="form-outline mb-4">
+                <input type="password" id="form2Example2" class="form-control" name="confirmpassword" />
+                <label class="form-label" for="form2Example2">Confirm Password</label>
+            </div>
 
-    <!-- Submit button -->
-    <button method="post" type="submit" class="btn btn-primary btn-block mb-4" asp-action="NewSignUp">Sign up</button>
+            <!-- Submit button -->
+            <button method="post" type="submit" class="btn btn-primary btn-block mb-4" asp-action="NewSignUp">Sign up</button>
 
-    <!-- Register buttons -->
-    <div class="text-center">
-        <p>Already a member? <a method="post" asp-action="Login">Login</a></p>
-        <p>This site uses cookies and by using the site you agree to this.</p>
+            <!-- Register buttons -->
+            <div class="text-center">
+                <p>Already a member? <a method="post" asp-action="Login">Login</a></p>
+                <p>This site uses cookies and by using the site you agree to this.</p>
+            </div>
+        </form>
     </div>
-</form>
+</div>

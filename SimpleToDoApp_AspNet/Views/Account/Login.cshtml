@@ -2,46 +2,49 @@
     ViewData["Title"] = "Login Page";
     Layout = "_LayoutNoLogoutBtn";
 }
-
-<form asp-action="SignInButton">
-    <!-- message area-->
-    @if (ViewData["Message"] != null)
-    {
-        <div class="alert alert-primary">
-            <strong>@ViewData["Message"]</strong>
-        </div>
-    }
-    <!-- Email input -->
-    <div class="form-outline mb-4">
-        <input type="email" id="form2Example1" class="form-control" name="email" />
-        <label class="form-label" for="form2Example1">Email address</label>
-    </div>
-
-    <!-- Password input -->
-    <div class="form-outline mb-4">
-        <input type="password" id="form2Example2" class="form-control" name="password" />
-        <label class="form-label" for="form2Example2">Password</label>
-    </div>
-
-    <!-- 2 column grid layout for inline styling -->
-    <div class="row mb-4">
-        <div class="col d-flex justify-content-center">
-            <div class="text-center">
-                <a asp-action="ForgotCredentials">Forgot Password or Email</a>
+<div class="row d-flex justify-content-center pt-4">
+    <div class="col-xl-4 col-lg-5 col-md-6 col-sm-8 col-9">
+        <form asp-action="SignInButton">
+            <!-- message area-->
+            @if (ViewData["Message"] != null)
+            {
+                <div class="alert alert-primary">
+                    <strong>@ViewData["Message"]</strong>
+                </div>
+            }
+            <!-- Email input -->
+            <div class="form-outline mb-4">
+                <input type="email" id="form2Example1" class="form-control" name="email" />
+                <label class="form-label" for="form2Example1">Email address</label>
             </div>
-@*            <!-- Checkbox -->
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked />
-                <label class="form-check-label" for="form2Example31"> Remember me </label>
-            </div>*@
-        </div>
-    </div>
 
-    <!-- Submit button -->
-    <button method="post" type="submit" class="btn btn-primary btn-block mb-4" asp-action="SignInButton">Sign in</button>
+            <!-- Password input -->
+            <div class="form-outline mb-4">
+                <input type="password" id="form2Example2" class="form-control" name="password" />
+                <label class="form-label" for="form2Example2">Password</label>
+            </div>
 
-    <!-- Register buttons -->
-    <div class="text-center">
-        <p>Not a member? <a asp-action="Signup">Register</a></p>
+            <!-- 2 column grid layout for inline styling -->
+            <div class="row mb-4">
+                <div class="col d-flex justify-content-center">
+                    <div class="text-center">
+                        <a asp-action="ForgotCredentials">Forgot Password or Email</a>
+                    </div>
+                    @*            <!-- Checkbox -->
+                    <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked />
+                    <label class="form-check-label" for="form2Example31"> Remember me </label>
+                    </div>*@
+                </div>
+            </div>
+
+            <!-- Submit button -->
+            <button method="post" type="submit" class="btn btn-primary btn-block mb-4" asp-action="SignInButton">Sign in</button>
+
+            <!-- Register buttons -->
+            <div class="text-center">
+                <p>Not a member? <a asp-action="Signup">Register</a></p>
+            </div>
+        </form>
     </div>
-</form>
+</div>
