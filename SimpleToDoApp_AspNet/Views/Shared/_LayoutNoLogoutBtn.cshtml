@@ -41,9 +41,23 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer">
         <div class="container">
-            &copy; 2022 - Simple To Do App - <a asp-area="" asp-controller="Home" asp-action="Documentation">Documentation</a>  <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <div class="row py-2">
+                <div class="col d-flex justify-content-center">
+                    <span>
+                        <a href="https://github.com/pizzapirate/SimpleToDoApp_AspNet">
+                            <i class="fa-brands fa-github fa-xl"></i>
+                        </a>
+                    </span>
+                </div>
+                <div class="col d-flex justify-content-center">
+                    <a asp-area="" asp-controller="Home" asp-action="Documentation">Documentation</a>
+                </div>
+                <div class="col d-flex justify-content-center">
+                    <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                </div>
+            </div>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

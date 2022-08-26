@@ -40,7 +40,11 @@
                                     <ul class="list-group mb-0">
                                         <li class="list-group-item d-flex justify-content-between align-items-center border-start-0 border-top-0 border-end-0 border-bottom rounded-0 mb-2">
                                             <div class="d-flex align-items-center">
-                                               <i class="fa-solid fa-plus"></i>@Html.DisplayFor(modelItem => item.ToDoTask)
+                                                <div class="px-1">
+                                                    <i class="fa-solid fa-plus"></i>
+                                                </div>
+                                               
+                                               @Html.DisplayFor(modelItem => item.ToDoTask)
                                             </div>
                                             <button type="submit" class="btn btn-outline-primary btn-sm ms-2"><i class="fa-solid fa-trash"></i></button>
                                         </li>
