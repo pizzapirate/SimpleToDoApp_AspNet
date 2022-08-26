@@ -13,7 +13,7 @@ namespace SimpleToDoApp_AspNet.Controllers
     public class HomeController : Controller
     {
         //Create connection to MongoClient object //will be added to appsettings.json later when using an actual database
-        public static MongoClient dbClient = new("mongodb://localhost:27017");
+        public static MongoClient dbClient = new("mongodb+srv://admin:dkJwnJrnTk2jIdx2@simpletodoappusers.erwsunc.mongodb.net/?retryWrites=true&w=majority");
 
         public async Task<IActionResult> Index()
         {
@@ -42,7 +42,7 @@ namespace SimpleToDoApp_AspNet.Controllers
         {
             var email = HttpContext.User.Claims.First(c => c.Type == "email").Value;
 
-            var database = dbClient.GetDatabase("ToDoDB");
+            var database = dbClient.GetDatabase("SimpleToDoAppLists");
             var collection = database.GetCollection<ToDoModel>(email);
             var results = await collection.FindAsync(_ => true);
             return results.ToList();
@@ -55,7 +55,7 @@ namespace SimpleToDoApp_AspNet.Controllers
             var email = HttpContext.User.Claims.First(c => c.Type == "email").Value;
 
             string addNewTaskInput = form["addNewTaskInput"].ToString();
-            var database = dbClient.GetDatabase("ToDoDB");
+            var database = dbClient.GetDatabase("SimpleToDoAppLists");
             var collection = database.GetCollection<ToDoModel>(email);
             ToDoModel newToDo = new () { ToDoTask = addNewTaskInput};
             await collection.InsertOneAsync(newToDo);
@@ -69,7 +69,7 @@ namespace SimpleToDoApp_AspNet.Controllers
         {
             var email = HttpContext.User.Claims.First(c => c.Type == "email").Value;
 
-            var database = dbClient.GetDatabase("ToDoDB");
+            var database = dbClient.GetDatabase("SimpleToDoAppLists");
             var collection = database.GetCollection<ToDoModel>(email);
 
             var builder = Builders<ToDoModel>.Filter;

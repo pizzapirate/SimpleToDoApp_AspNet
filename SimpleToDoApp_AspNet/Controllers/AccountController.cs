@@ -12,8 +12,8 @@ namespace SimpleToDoApp_AspNet.Controllers
     public class AccountController : Controller
     {
         //Create connection to MongoClient object //will be added to appsettings.json later when using an actual database
-        public static MongoClient dbClient = new("mongodb://localhost:27017");
-        public IMongoDatabase database = dbClient.GetDatabase("AspEmailLoginTests"); //name of database where credentials are stored. 
+        public static MongoClient dbClient = new("mongodb+srv://admin:dkJwnJrnTk2jIdx2@simpletodoappusers.erwsunc.mongodb.net/?retryWrites=true&w=majority");
+        public IMongoDatabase database = dbClient.GetDatabase("SimpleToDoAppUsers"); //name of database where credentials are stored. 
 
         //the login page
         public IActionResult Login()
