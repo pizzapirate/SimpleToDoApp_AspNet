@@ -11,9 +11,12 @@ namespace SimpleToDoApp_AspNet.Controllers
 {
     public class AccountController : Controller
     {
-        //Create connection to MongoClient object //will be added to appsettings.json later when using an actual database
-        public static MongoClient dbClient = new("mongodb+srv://admin:dkJwnJrnTk2jIdx2@simpletodoappusers.erwsunc.mongodb.net/?retryWrites=true&w=majority");
-        public IMongoDatabase database = dbClient.GetDatabase("SimpleToDoAppUsers"); //name of database where credentials are stored. 
+        private readonly IConfiguration _configuration; //how to access configuration settings via asp.net MVC controller
+
+        public AccountController(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
 
         //the login page
         public IActionResult Login()
@@ -22,6 +25,9 @@ namespace SimpleToDoApp_AspNet.Controllers
         }
         public async Task<IActionResult> SignInButton(IFormCollection form)
         {
+            string myMongoDBConnection = _configuration.GetConnectionString("DefaultConnection"); //accessing configuration settings
+            MongoClient dbClient = new(myMongoDBConnection); //creating connection to mongodbclient using configuration settings
+            IMongoDatabase database = dbClient.GetDatabase("SimpleToDoAppUsers"); //name of the database where user credentials are stored
             //null checker
             if (String.IsNullOrWhiteSpace(form["email"].ToString()) || String.IsNullOrWhiteSpace(form["password"].ToString()))
             {
@@ -87,6 +93,10 @@ namespace SimpleToDoApp_AspNet.Controllers
                 return View("Signup");
             }
 
+            string myMongoDBConnection = _configuration.GetConnectionString("DefaultConnection"); //accessing configuration settings
+            MongoClient dbClient = new(myMongoDBConnection); //creating connection to mongodbclient using configuration settings
+            IMongoDatabase database = dbClient.GetDatabase("SimpleToDoAppUsers"); //name of the database where user credentials are stored
+
             var newUserEmail = form["email"].ToString();
             var collection = database.GetCollection<User>(newUserEmail);
             string inputPassword = form["password"].ToString();
@@ -112,6 +122,10 @@ namespace SimpleToDoApp_AspNet.Controllers
         //lists the collections in the database, since each collection name is an email, this is used for validation to check if a user already exists or not
         public List<string> GetCollections()
         {
+            string myMongoDBConnection = _configuration.GetConnectionString("DefaultConnection"); //accessing configuration settings
+            MongoClient dbClient = new(myMongoDBConnection); //creating connection to mongodbclient using configuration settings
+            IMongoDatabase database = dbClient.GetDatabase("SimpleToDoAppUsers"); //name of the database where user credentials are stored
+
             List<string> collections = new List<string>();
 
             foreach (BsonDocument collection in database.ListCollectionsAsync().Result.ToListAsync<BsonDocument>().Result)
