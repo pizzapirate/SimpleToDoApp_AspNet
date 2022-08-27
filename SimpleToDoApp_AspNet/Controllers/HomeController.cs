@@ -5,6 +5,7 @@ using SimpleToDoApp_AspNet;
 using MongoDB.Driver;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
+using Microsoft.Extensions.Configuration;
 
 
 namespace SimpleToDoApp_AspNet.Controllers
@@ -12,8 +13,12 @@ namespace SimpleToDoApp_AspNet.Controllers
 
     public class HomeController : Controller
     {
-        //Create connection to MongoClient object //will be added to appsettings.json later when using an actual database
-        public static MongoClient dbClient = new("mongodb+srv://admin:dkJwnJrnTk2jIdx2@simpletodoappusers.erwsunc.mongodb.net/?retryWrites=true&w=majority");
+        private readonly IConfiguration _configuration; //how to access configuration settings via asp.net MVC controller
+
+        public HomeController(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
 
         public async Task<IActionResult> Index()
         {
@@ -40,6 +45,9 @@ namespace SimpleToDoApp_AspNet.Controllers
         }
         public async Task<List<ToDoModel>> GetToDoModels()
         {
+            string myMongoDBConnection = _configuration.GetConnectionString("DefaultConnection"); //accessing configuration settings
+            MongoClient dbClient = new(myMongoDBConnection); //creating connection to mongodbclient using configuration settings
+
             var email = HttpContext.User.Claims.First(c => c.Type == "email").Value;
 
             var database = dbClient.GetDatabase("SimpleToDoAppLists");
@@ -52,6 +60,9 @@ namespace SimpleToDoApp_AspNet.Controllers
         [HttpPost]
         public async Task<IActionResult> AddNewToDo(IFormCollection form)
         {
+            string myMongoDBConnection = _configuration.GetConnectionString("DefaultConnection"); //accessing configuration settings
+            MongoClient dbClient = new(myMongoDBConnection); //creating connection to mongodbclient using configuration settings
+
             var email = HttpContext.User.Claims.First(c => c.Type == "email").Value;
 
             string addNewTaskInput = form["addNewTaskInput"].ToString();
@@ -67,6 +78,9 @@ namespace SimpleToDoApp_AspNet.Controllers
         [HttpPost]
         public async Task<ActionResult<ToDoModel>> DeleteToDo(string id)
         {
+            string myMongoDBConnection = _configuration.GetConnectionString("DefaultConnection"); //accessing configuration settings
+            MongoClient dbClient = new(myMongoDBConnection); //creating connection to mongodbclient using configuration settings
+
             var email = HttpContext.User.Claims.First(c => c.Type == "email").Value;
 
             var database = dbClient.GetDatabase("SimpleToDoAppLists");
