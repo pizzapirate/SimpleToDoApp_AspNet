@@ -35,6 +35,15 @@
             </div>
         </nav>
     </header>
+
+    <div id="CookiePopup" class="card">
+        <div class="my-3 mx-4">
+            <h3><i class="fa-solid fa-cookie-bite"></i> Cookie Consent</h3>
+            <p>Click to accept the cookie <a style="text-decoration: none;" asp-area="" asp-controller="Home" asp-action="Privacy">policy</a>!</p>
+            <button type="button" class="btn btn-primary" onclick="acceptCookieConsent()">Accept</button>
+        </div>
+    </div>
+    
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
