@@ -12,6 +12,8 @@ internal class Program
         builder.Services.AddAuthentication("MyCookieAuth").AddCookie("MyCookieAuth", options =>
         {
             options.Cookie.Name = "MyCookieAuth";
+            options.ExpireTimeSpan = TimeSpan.FromDays(365);
+            options.Cookie.MaxAge = TimeSpan.FromDays(365);
         });
 
         var app = builder.Build();
